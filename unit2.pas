@@ -15,6 +15,7 @@ type
   TForm2 = class(TForm)
     Button1: TButton;
     Button2: TButton;
+    Button3: TButton;
     DataSource1: TDataSource;
     Image1: TImage;
     Image10: TImage;
@@ -49,6 +50,7 @@ type
     StringGrid1: TStringGrid;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure Image1Click(Sender: TObject);
     procedure Image2Click(Sender: TObject);
@@ -66,6 +68,9 @@ var
   Form2: TForm2;
 
 implementation
+
+uses
+  unit1;
 
 {$R *.lfm}
 
@@ -89,6 +94,12 @@ begin
   // Redefine o valor total
   TotalValue := 0;
   Label4.Caption := 'R$ 0.00'
+end;
+
+procedure TForm2.Button3Click(Sender: TObject);
+begin
+  form2.hide;
+  form1.show;
 end;
 
 procedure TForm2.Button1Click(Sender: TObject);

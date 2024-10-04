@@ -16,6 +16,7 @@ type
     BitBtn2: TBitBtn;
     Panel1: TPanel;
     procedure BitBtn1Click(Sender: TObject);
+    procedure BitBtn2Click(Sender: TObject);
   private
 
   public
@@ -28,7 +29,7 @@ var
 implementation
 
 uses
-  unit2;
+  unit2, unit3;
 
 {$R *.lfm}
 
@@ -37,6 +38,12 @@ uses
 procedure TForm1.BitBtn1Click(Sender: TObject);
 begin
   Form2.Show;
+  Form1.Hide;
+end;
+
+procedure TForm1.BitBtn2Click(Sender: TObject);
+begin
+  Form3.Show;
   Form1.Hide;
 end;
 

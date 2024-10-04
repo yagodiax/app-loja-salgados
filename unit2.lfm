@@ -1,11 +1,11 @@
 object Form2: TForm2
-  Left = -1190
+  Left = -1176
   Height = 600
-  Top = 83
+  Top = 70
   Width = 1000
   Caption = 'Form2'
-  ClientHeight = 0
-  ClientWidth = 0
+  ClientHeight = 600
+  ClientWidth = 1000
   OnCreate = FormCreate
   LCLVersion = '3.4.0.0'
   object Panel1: TPanel
@@ -32862,17 +32862,17 @@ object Form2: TForm2
       Width = 76
     end
     object StringGrid1: TStringGrid
-      Left = 496
+      Left = 480
       Height = 376
-      Top = 61
+      Top = 56
       Width = 504
       RowCount = 1
       TabOrder = 0
     end
     object Panel2: TPanel
-      Left = 496
+      Left = 480
       Height = 90
-      Top = 437
+      Top = 432
       Width = 252
       ClientHeight = 90
       ClientWidth = 252
@@ -32898,9 +32898,9 @@ object Form2: TForm2
       end
     end
     object Panel3: TPanel
-      Left = 748
+      Left = 732
       Height = 90
-      Top = 437
+      Top = 432
       Width = 252
       ClientHeight = 90
       ClientWidth = 252
@@ -32994,6 +32994,15 @@ object Form2: TForm2
       Width = 21
       Caption = '7,00'
     end
+    object Button3: TButton
+      Left = 894
+      Height = 25
+      Top = 553
+      Width = 75
+      Caption = 'Button3'
+      TabOrder = 3
+      OnClick = Button3Click
+    end
   end
   object SQLTransaction1: TSQLTransaction
     Active = True
@@ -33018,7 +33027,6 @@ object Form2: TForm2
     Top = 8
   end
   object SQLQuery1: TSQLQuery
-    IndexName = 'DEFAULT_ORDER'
     MaxIndexesCount = 4
     FieldDefs = <    
       item
@@ -33042,7 +33050,6 @@ object Form2: TForm2
         DataType = ftDate
         Precision = -1
       end>
-    Active = True
     Database = MySQL56Connection1
     Transaction = SQLTransaction1
     SQL.Strings = (
