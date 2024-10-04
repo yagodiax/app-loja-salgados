@@ -14,8 +14,8 @@ type
   TForm1 = class(TForm)
     BitBtn1: TBitBtn;
     BitBtn2: TBitBtn;
-    BitBtn3: TBitBtn;
     Panel1: TPanel;
+    procedure BitBtn1Click(Sender: TObject);
   private
 
   public
@@ -27,7 +27,18 @@ var
 
 implementation
 
+uses
+  unit2;
+
 {$R *.lfm}
+
+{ TForm1 }
+
+procedure TForm1.BitBtn1Click(Sender: TObject);
+begin
+  Form2.Show;
+  Form1.Hide;
+end;
 
 end.
 

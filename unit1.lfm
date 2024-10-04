@@ -4,8 +4,8 @@ object Form1: TForm1
   Top = 49
   Width = 1000
   Caption = 'Form1'
-  ClientHeight = 0
-  ClientWidth = 0
+  ClientHeight = 600
+  ClientWidth = 1000
   LCLVersion = '3.4.0.0'
   object Panel1: TPanel
     Left = 0
@@ -17,28 +17,21 @@ object Form1: TForm1
     ClientWidth = 1000
     TabOrder = 0
     object BitBtn1: TBitBtn
-      Left = 256
+      Left = 344
       Height = 118
-      Top = 208
+      Top = 240
       Width = 128
       Caption = 'Registrar Venda'
+      OnClick = BitBtn1Click
       TabOrder = 0
     end
     object BitBtn2: TBitBtn
-      Left = 440
+      Left = 528
       Height = 118
-      Top = 208
+      Top = 240
       Width = 128
       Caption = 'Consulta'
       TabOrder = 1
-    end
-    object BitBtn3: TBitBtn
-      Left = 624
-      Height = 118
-      Top = 208
-      Width = 128
-      Caption = 'Gerenciar Produtos'
-      TabOrder = 2
     end
   end
 end
