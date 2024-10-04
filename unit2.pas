@@ -5,8 +5,8 @@ unit Unit2;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, Buttons,
-  ExtCtrls, Menus, Grids, ComCtrls;
+  Classes, SysUtils, DB, SQLDB, mysql80conn, Forms, Controls, Graphics, Dialogs,
+  StdCtrls, Buttons, ExtCtrls, Menus, Grids, ComCtrls;
 
 type
 
@@ -15,6 +15,7 @@ type
   TForm2 = class(TForm)
     Button1: TButton;
     Button2: TButton;
+    DataSource1: TDataSource;
     Image1: TImage;
     Image10: TImage;
     Image11: TImage;
@@ -28,19 +29,29 @@ type
     Image8: TImage;
     Image9: TImage;
     Label1: TLabel;
+    Label10: TLabel;
+    Label11: TLabel;
+    Label12: TLabel;
     Label2: TLabel;
     Label3: TLabel;
     Label4: TLabel;
     Label5: TLabel;
     Label6: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    Label9: TLabel;
     Panel1: TPanel;
     Panel2: TPanel;
     Panel3: TPanel;
+    SQLQuery1: TSQLQuery;
     StringGrid1: TStringGrid;
     procedure Button2Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure Image1Click(Sender: TObject);
     procedure Image2Click(Sender: TObject);
+    procedure Image3Click(Sender: TObject);
+    procedure Image4Click(Sender: TObject);
+    procedure Image5Click(Sender: TObject);
   private
     TotalValue: Double;
     procedure AddItem(ItemName: String; Value: Double);
@@ -85,6 +96,21 @@ end;
 procedure TForm2.Image2Click(Sender: TObject);
 begin
   AddItem('Queijo C Presunto', 7.00);
+end;
+
+procedure TForm2.Image3Click(Sender: TObject);
+begin
+  AddItem('Assado Queijo C Presunto', 8.00);
+end;
+
+procedure TForm2.Image4Click(Sender: TObject);
+begin
+  AddItem('Pastel', 7.00);
+end;
+
+procedure TForm2.Image5Click(Sender: TObject);
+begin
+  AddItem('Kibe', 8.00);
 end;
 
 procedure TForm2.AddItem(ItemName: String; Value: Double);
