@@ -5,8 +5,8 @@ unit Unit2;
 interface
 
 uses
-  Classes, SysUtils, DB, SQLDB, mysql80conn, Forms, Controls, Graphics, Dialogs,
-  StdCtrls, Buttons, ExtCtrls, Menus, Grids, ComCtrls;
+  Classes, SysUtils, DB, SQLDB, mysql80conn, mysql56conn, Forms, Controls,
+  Graphics, Dialogs, StdCtrls, Buttons, ExtCtrls, Menus, Grids, ComCtrls;
 
 type
 
@@ -40,11 +40,14 @@ type
     Label7: TLabel;
     Label8: TLabel;
     Label9: TLabel;
+    MySQL56Connection1: TMySQL56Connection;
     Panel1: TPanel;
     Panel2: TPanel;
     Panel3: TPanel;
     SQLQuery1: TSQLQuery;
+    SQLTransaction1: TSQLTransaction;
     StringGrid1: TStringGrid;
+    procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure Image1Click(Sender: TObject);
@@ -86,6 +89,51 @@ begin
   // Redefine o valor total
   TotalValue := 0;
   Label4.Caption := 'R$ 0.00'
+end;
+
+procedure TForm2.Button1Click(Sender: TObject);
+var
+  i: Integer;
+  ItemName: String;
+  ItemValue: Double;
+  CurrentDateTime: TDateTime;
+  ValueStr: String;
+begin
+  // Itera sobre todas as linhas do StringGrid (exceto a linha do cabeçalho)
+  try
+    for i := 1 to StringGrid1.RowCount - 1 do
+    begin
+      ItemName := StringGrid1.Cells[1, i];
+      ValueStr := StringGrid1.Cells[2, i];
+      ItemValue := StrToFloat(StringReplace(ValueStr, 'R$ ', '', [rfReplaceAll]));
+      CurrentDateTime := Now; // Obtém a data e hora atuais
+
+      // Insere cada item no banco de dados
+      with SQLQuery1 do
+      begin
+        Close;
+        SQL.Clear;
+        SQL.Add('INSERT INTO vendas (item, valor, data) VALUES (:salgado, :valor, :data_hora)');
+        ParamByName('salgado').AsString := ItemName;
+        ParamByName('valor').AsFloat := ItemValue;
+        ParamByName('data_hora').AsDateTime := CurrentDateTime;
+        ExecSQL;
+        SQLTransaction1.Commit;
+      end;
+    end;
+    // Limpa o StringGrid
+    StringGrid1.RowCount := 1;
+    TotalValue := 0;
+    Label4.Caption := 'R$ 0.00';
+
+    ShowMessage('Itens inseridos com sucesso!');
+  except
+    on E: Exception do
+    begin
+      ShowMessage('Erro ao inserir dados: ' + E.Message);
+      SQLTransaction1.Rollback;
+    end;
+  end;
 end;
 
 procedure TForm2.Image1Click(Sender: TObject);

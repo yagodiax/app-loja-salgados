@@ -1,11 +1,11 @@
 object Form2: TForm2
-  Left = 292
+  Left = -1190
   Height = 600
-  Top = 103
+  Top = 83
   Width = 1000
   Caption = 'Form2'
-  ClientHeight = 600
-  ClientWidth = 1000
+  ClientHeight = 0
+  ClientWidth = 0
   OnCreate = FormCreate
   LCLVersion = '3.4.0.0'
   object Panel1: TPanel
@@ -32912,6 +32912,7 @@ object Form2: TForm2
         Width = 95
         Caption = 'Finalizar Venda'
         TabOrder = 0
+        OnClick = Button1Click
       end
       object Button2: TButton
         Left = 136
@@ -32994,15 +32995,67 @@ object Form2: TForm2
       Caption = '7,00'
     end
   end
-  object DataSource1: TDataSource
-    Left = 608
-    Top = 544
+  object SQLTransaction1: TSQLTransaction
+    Active = True
+    Action = caCommit
+    Database = MySQL56Connection1
+    Left = 712
+    Top = 8
+  end
+  object MySQL56Connection1: TMySQL56Connection
+    Connected = True
+    LoginPrompt = False
+    DatabaseName = 'lojasalgados'
+    KeepConnection = False
+    Params.Strings = (
+      'Port=3306'
+    )
+    Transaction = SQLTransaction1
+    UserName = 'root'
+    HostName = 'localhost'
+    SkipLibraryVersionCheck = False
+    Left = 648
+    Top = 8
   end
   object SQLQuery1: TSQLQuery
-    FieldDefs = <>
+    IndexName = 'DEFAULT_ORDER'
+    MaxIndexesCount = 4
+    FieldDefs = <    
+      item
+        Name = 'id'
+        DataType = ftAutoInc
+        Precision = -1
+      end    
+      item
+        Name = 'item'
+        DataType = ftString
+        Precision = -1
+        Size = 255
+      end    
+      item
+        Name = 'valor'
+        DataType = ftFloat
+        Precision = -1
+      end    
+      item
+        Name = 'data'
+        DataType = ftDate
+        Precision = -1
+      end>
+    Active = True
+    Database = MySQL56Connection1
+    Transaction = SQLTransaction1
+    SQL.Strings = (
+      'SELECT * FROM vendas'
+    )
     Params = <>
     Macros = <>
-    Left = 680
-    Top = 544
+    Left = 776
+    Top = 8
+  end
+  object DataSource1: TDataSource
+    DataSet = SQLQuery1
+    Left = 840
+    Top = 8
   end
 end
