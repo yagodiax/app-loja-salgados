@@ -4,9 +4,9 @@ object Form3: TForm3
   Top = 57
   Width = 1000
   Caption = 'Form3'
-  ClientHeight = 600
-  ClientWidth = 1000
-  LCLVersion = '3.4.0.0'
+  ClientHeight = 0
+  ClientWidth = 0
+  LCLVersion = '3.6.0.0'
   object Panel1: TPanel
     Left = 0
     Height = 600

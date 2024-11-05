@@ -68,14 +68,12 @@ begin
 
   SQLQuery1.Close;
 
-  // Verifica se os campos de data estão preenchidos
   if (startDate = '') or (endDate = '') then
   begin
     ShowMessage('Por favor, preencha ambos os campos de data.');
     Exit;
   end;
 
-  // Define a consulta com os parâmetros necessários
   SQLQuery1.SQL.Text := 'SELECT * FROM vendas WHERE data BETWEEN :startDate AND :endDate';
 
   if comboBoxText <> '' then
@@ -87,10 +85,8 @@ begin
   SQLQuery1.Params.ParamByName('startDate').AsDate := StrToDate(startDate);
   SQLQuery1.Params.ParamByName('endDate').AsDate := StrToDate(endDate);
 
-  // Executa a consulta no DBGrid
   SQLQuery1.Open;
 
-  // Verifica se há registros retornados
   if SQLQuery1.IsEmpty then
   begin
     ShowMessage('Nenhum dado encontrado.');
@@ -100,7 +96,6 @@ begin
     Exit;
   end;
 
-  // Conta os registros retornados e soma os valores
   totalValue := 0;
   recordCount := 0;
   SQLQuery1.First;
@@ -111,20 +106,16 @@ begin
     SQLQuery1.Next;
   end;
 
-  // Exibe o total de valores em Label6
   Label6.Caption := 'R$ ' + FormatFloat('0.00', totalValue);
 
-  // Exibe o número total de registros em Label7
   Label7.Caption := IntToStr(recordCount);
 
-  // Se algo estiver escrito no ComboBox, cancela a lista dos mais vendidos
   if comboBoxText <> '' then
   begin
     Label10.Caption := '';
     Exit;
   end;
 
-  // Usar um segundo TSQLQuery para a consulta dos itens mais vendidos
   SQLQueryTopItems.Close;
   SQLQueryTopItems.SQL.Text := 'SELECT item, COUNT(*) AS quantidade FROM vendas ' +
                         'WHERE data BETWEEN :startDate AND :endDate ' +
@@ -133,7 +124,6 @@ begin
   SQLQueryTopItems.Params.ParamByName('startDate').AsDate := StrToDate(startDate);
   SQLQueryTopItems.Params.ParamByName('endDate').AsDate := StrToDate(endDate);
 
-  // Executa a consulta
   SQLQueryTopItems.Open;
 
   topItems := TStringList.Create;
@@ -145,7 +135,6 @@ begin
       SQLQueryTopItems.Next;
     end;
 
-    // Exibe os 5 itens mais vendidos em Label10
     Label10.Caption := topItems.Text;
   finally
     topItems.Free;

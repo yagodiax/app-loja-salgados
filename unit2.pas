@@ -82,16 +82,13 @@ begin
   StringGrid1.Cells[0, 0] := 'Qtd';
   StringGrid1.Cells[1, 0] := 'Produto';
   StringGrid1.Cells[2, 0] := 'Valor';
-  TotalValue := 0; // Inicializar o valor total
+  TotalValue := 0;
   Label4.Caption := 'R$ 0.00';
 end;
 
 procedure TForm2.Button2Click(Sender: TObject);
 begin
-  // Limpa todas as linhas do StringGrid, exceto a linha do cabeçalho
   StringGrid1.RowCount := 1;
-
-  // Redefine o valor total
   TotalValue := 0;
   Label4.Caption := 'R$ 0.00'
 end;
@@ -110,16 +107,13 @@ var
   CurrentDateTime: TDateTime;
   ValueStr: String;
 begin
-  // Itera sobre todas as linhas do StringGrid (exceto a linha do cabeçalho)
   try
     for i := 1 to StringGrid1.RowCount - 1 do
     begin
       ItemName := StringGrid1.Cells[1, i];
       ValueStr := StringGrid1.Cells[2, i];
       ItemValue := StrToFloat(StringReplace(ValueStr, 'R$ ', '', [rfReplaceAll]));
-      CurrentDateTime := Now; // Obtém a data e hora atuais
-
-      // Insere cada item no banco de dados
+      CurrentDateTime := Now;
       with SQLQuery1 do
       begin
         Close;
@@ -132,7 +126,7 @@ begin
         SQLTransaction1.Commit;
       end;
     end;
-    // Limpa o StringGrid
+
     StringGrid1.RowCount := 1;
     TotalValue := 0;
     Label4.Caption := 'R$ 0.00';
@@ -180,17 +174,13 @@ begin
   RowIndex := StringGrid1.RowCount;
   StringGrid1.RowCount := StringGrid1.RowCount + 1;
 
-  // Adiciona a quantidade
   StringGrid1.Cells[0, RowIndex] := IntToStr(RowIndex);
 
-  // Adiciona o nome
   StringGrid1.Cells[1, RowIndex] := ItemName;
 
-  // Adiciona o valor
   ItemValue := Value;
   StringGrid1.Cells[2, RowIndex] := FormatFloat('R$ 0.00', ItemValue);
 
-  // Atualiza o valor total e exibe na label
   TotalValue := TotalValue + ItemValue;
   Label4.Caption := 'R$ ' + FormatFloat('0.00', TotalValue);
 end;
